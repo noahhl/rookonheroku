@@ -1,4 +1,4 @@
-#!/usr/bin/bash
+#!/bin/bash
 curl http://gfortran.org/download/x86_64/xz.tar.gz -o xz.tar.gz
 curl http://gfortran.org/download/x86_64/snapshots/gcc-4.3.tar.xz -o gcc-4.3.tar.xz
 tar xzvf xz.tar.gz 
@@ -13,7 +13,7 @@ cd R-2.13.1/
 export PATH=/app/tmp/gcc-4.3/bin:$PATH
 export LDFLAGS="-L/app/bin/gcc-4.3/lib64/ -R/app/bin/gcc-4.3/lib64/"
 export CPPFLAGS="-I/app/bin/glibc-2.7/string/ -I/app/bin/glibc-2.7/time"
-./configure --prefix=/app/tmp/R-2.13.1/ --without-x  --with-system-zlib --with-system-pcre 
+./configure --prefix=/app/tmp/R-2.13.1/ --without-x 
 make
 
 
