@@ -10,7 +10,7 @@ TestApp <- Rook::Builder$new(
 
 rook <- Rhttpd$new()
 rook$add(name="TestApp", app=TestApp)
-rook$start(port=as.numeric(Sys.getenv("PORT")))
+rook$start(listen="0.0.0.0", port=as.numeric(Sys.getenv("PORT")))
 
 while(T) {
   Sys.sleep(10000)
