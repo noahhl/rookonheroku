@@ -1,0 +1,18 @@
+Package: Rook
+Type: Package
+Title: Rook - a web server interface for R
+Version: 1.0-2
+Date: 2011-04-14
+Author: Jeffrey Horner <jeffrey.horner@gmail.com>
+Maintainer: Jeffrey Horner <jeffrey.horner@gmail.com>
+Description: This package contains the Rook specification and
+        convenience software for building and running Rook
+        applications. To get started, be sure and read the 'Rook' help
+        file first.
+Depends: R (>= 2.13.0), utils, tools, methods, brew
+License: GPL-2
+LazyLoad: yes
+Packaged: 2011-04-24 22:43:15 UTC; hornerj
+Repository: CRAN
+Date/Publication: 2011-04-25 06:10:33
+Built: R 2.13.1; x86_64-unknown-linux-gnu; 2011-09-25 20:12:14 UTC; unix

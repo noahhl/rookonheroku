@@ -1,0 +1,16 @@
+: ${JAVA_HOME=/usr/lib/jvm/java-6-openjdk/jre}
+: ${R_JAVA_LD_LIBRARY_PATH=${JAVA_HOME}/lib/amd64/server:${JAVA_HOME}/lib/amd64:/usr/lib/jni}
+if test -n "/app/bin/gcc-4.3/lib64/:/app/bin/gcc-4.3/lib64"; then
+: ${R_LD_LIBRARY_PATH=${R_HOME}/lib:/app/bin/gcc-4.3/lib64/:/app/bin/gcc-4.3/lib64}
+else
+: ${R_LD_LIBRARY_PATH=${R_HOME}/lib}
+fi
+if test -n "${R_JAVA_LD_LIBRARY_PATH}"; then
+  R_LD_LIBRARY_PATH="${R_LD_LIBRARY_PATH}:${R_JAVA_LD_LIBRARY_PATH}"
+fi
+if test -z "${LD_LIBRARY_PATH}"; then
+  LD_LIBRARY_PATH="${R_LD_LIBRARY_PATH}"
+else
+  LD_LIBRARY_PATH="${R_LD_LIBRARY_PATH}:${LD_LIBRARY_PATH}"
+fi
+export LD_LIBRARY_PATH

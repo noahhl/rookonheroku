@@ -1,0 +1,5 @@
+#
+# ${R_HOME}/bin/Stangle
+
+R_EXE="${R_HOME}/bin/R"
+echo "utils:::.Stangle(\"$1\")" | "${R_EXE}" --vanilla --slave
