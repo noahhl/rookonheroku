@@ -70,7 +70,7 @@ following (saved in "demo.R"):
 
 <pre>
 require('Rook')
-rook <- Rhttpd$new()
+rook = Rhttpd$new()
 rook$add(name="TestApp", app=TestApp)
 rook$start(listen='0.0.0.0', port=as.numeric(Sys.getenv("PORT")))
 
@@ -87,17 +87,11 @@ to send HTTP requests to that port.
 Now we need to tell Heroku what to do with our app once we push it to it.
 
 In config.ru, add a line like:
-
-<pre>
-`/app/bin/R-2.13.1/bin/R -e "source('/app/demo.R')"`
-</pre>
+<code>`/app/bin/R-2.13.1/bin/R -e "source('/app/demo.R')"`</code>
 
 Then, create a file called <code>Procfile</code> with a specification like the
 following in it:
-
-<pre>
-web: bundle exec rackup config.ru 
-</pre>
+<code>web: bundle exec rackup config.ru </code>
 
 This will execute our server. Heroku doesn't recognize we're running a web
 server if we start it directly, and so it won't be able to direct web requests
@@ -106,9 +100,7 @@ starting it up.
 
 <h3>4. Launch your application</h3>
 Now, add your application and Procfile and push to Heroku one more time (this should be a faster push than before). After you push, we need to tell Heroku to spin up one or more web processes.
-<pre>
-heroku ps:scale web=1
-</pre>
+<code>heroku ps:scale web=1</code>
 
 If we wanted to, we could spin up more than one web process to increase our
 capacity -- we're just using the built in web-server that R offers here, so it
