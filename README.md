@@ -1,6 +1,7 @@
-Getting Rook running on Heroku takes a bit of work:
+<h2>Getting Rook running on Heroku takes a bit of work:</h2>
 
-1) First, you have to build R to run on the Heroku platform. This gets a little
+<h3>1. Building R on Heroku</h3>
+First, you have to build R to run on the Heroku platform. This gets a little
 tricky because the version of gcc that's available on the platform doesn't
 include gfortran, and none of the needed libraries are available. The full
 steps to build from source are in <code>bin/installR.sh</code> of this repo, but in short,
@@ -58,7 +59,8 @@ To test, close your existing session on heroku, commit all of your files, push
 to Heroku, start a new bash session, and run R. You're committing a lot of
 files, so it will take a while for the first push after adding them.
 
-2) Now you should have a copy of R built on the Heroku platform in your bin/
+<h3>2. Set up your Rook app</h3>
+Now you should have a copy of R built on the Heroku platform in your bin/
 directory. You can now develop your Rook application as you normally would. I'd
 actually recommend developing it before you do step 1 so you can be sure all of
 your needed packages end up installed appropriately.
@@ -81,7 +83,8 @@ This will just get us the standard Rook test app. You'll notice I bound the Rook
 variable port. Heroku sets a port for each process you set running, and knows
 to send HTTP requests to that port.
 
-3) Now we need to tell Heroku what to do with our app once we push it to it.
+<h3>3. Configure Heroku</h3>
+Now we need to tell Heroku what to do with our app once we push it to it.
 
 In config.ru, add a line like:
 
@@ -101,7 +104,8 @@ server if we start it directly, and so it won't be able to direct web requests
 to it. If we wrap it up in <code>config.ru</code>, Heroku has no problem
 starting it up.
 
-4) Now, add your application and Procfile and push to Heroku one more time (this should be a faster push than before). After you push, we need to tell Heroku to spin up one or more web processes.
+<h3>4. Launch your application</h3>
+Now, add your application and Procfile and push to Heroku one more time (this should be a faster push than before). After you push, we need to tell Heroku to spin up one or more web processes.
 <pre>
 heroku ps:scale web=1
 </pre>
@@ -113,43 +117,6 @@ Heroku should automatically load balance among the multiple processes we spin
 up. Do keep in mind Heroku's pricing model -- you basically get one process
 running 24x7 for free, but pay for additional ones.
 
-5) Now we can test our app out. It should be running at
-http://yourprojectname.herokuapp.com/custom/RookTest
-
-<pre>
-$ curl http://rookonheroku.herokuapp.com/custom/RookTest
-<HTML><head><style type="text/css">
-table { border: 1px solid #8897be; border-spacing: 0px; font-size: 10pt; }td { border-bottom:1px solid #d9d9d9; border-left:1px solid #d9d9d9; border-spacing: 0px; padding: 3px 8px; }td.l { font-weight: bold; width: 10%; }
-tr.e { background-color: #eeeeee; border-spacing: 0px; }
-tr.o { background-color: #ffffff; border-spacing: 0px; }
-</style></head><BODY><img alt="rook logo" src="http://wiki.rapache.net/static/rook.png"><H1>Welcome to Rook</H1>
-<form enctype="multipart/form-data" method=POST action="/custom/RookTest/thogeeexgq?called=13.6027460331097">Enter a string: <input type=text name=name value=""><br>
-Enter another string: <input type=text name=name2 value=""><br>
-Upload a file: <input type=file name=fileUpload><br>
-Upload another file: <input type=file name=anotherFile><br>
-<input type=submit name=Submit><br><br>Environment:<br><pre>List of 21
- $ HTTP_X_HEROKU_QUEUE_WAIT_TIME: chr "3"
- $ HTTP_X_FORWARDED_PROTO       : chr "http"
- $ HTTP_CONNECTION              : chr "keep-alive"
- $ HTTP_ACCEPT                  : chr "*/*"
- $ QUERY_STRING                 : chr ""
- $ SERVER_NAME                  : chr "rookonheroku.herokuapp.com"
- $ SCRIPT_NAME                  : chr "/custom/RookTest"
- $ SERVER_PORT                  : chr NA
- $ rook.input                   :Formal class 'RhttpdInputStream' [package "Rook"] with 1 slots
-  .. ..@ .xData:<environment: 0x2bc02c8> 
- $ PATH_INFO                    : chr ""
- $ rook.version                 : chr "1.0-2"
- $ rook.errors                  :Formal class 'RhttpdErrorStream' [package "Rook"] with 1 slots
-  .. ..@ .xData:<environment: 0x32fd670> 
- $ HTTP_X_FORWARDED_FOR         : chr "100.100.0.1"
- $ rook.url_scheme              : chr "http"
- $ HTTP_X_FORWARDED_PORT        : chr "80"
- $ REQUEST_METHOD               : chr "GET"
- $ HTTP_X_HEROKU_DYNOS_IN_USE   : chr "1"
- $ HTTP_USER_AGENT              : chr "curl/7.21.4 (universal-apple-darwin11.0) libcurl/7.21.4 OpenSSL/0.9.8r zlib/1.2.5"
- $ HTTP_HOST                    : chr "rookonheroku.herokuapp.com"
- $ HTTP_X_REQUEST_START         : chr "1316984883377"
- $ HTTP_X_HEROKU_QUEUE_DEPTH    : chr "0"</pre><br>Get:<br><pre> list()</pre><br>Post:<br><pre> NULL</pre><br><br>
-
-</pre>
+<h3>Test your app and enjoy</h3>
+Now we can test our app out. It should be running at
+http://yourprojectname.herokuapp.com/custom/RookTest (you can hit http://rookonheroku.herokuapp.com/custom/RookTest for this demo).
